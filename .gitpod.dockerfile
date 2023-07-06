@@ -1,15 +1,18 @@
 FROM gitpod/workspace-postgres
+USER gitpod
 
-# Install Ruby
+# Taken from https://www.gitpod.io/docs/languages/ruby
+RUN _ruby_version=ruby-3.0.6 \
+    && printf "rvm_gems_path=/home/gitpod/.rvm\n" > ~/.rvmrc \
+    && bash -lc "rvm reinstall ${_ruby_version} && \
+                 rvm use ${_ruby_version} --default" \
+    && printf "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc \
+    && printf "{ rvm use \$(rvm current); } >/dev/null 2>&1\n" >> "$HOME/.bashrc.d/70-ruby"
+
 ENV RUBY_VERSION=3.0.6
 
 # Install the GitHub CLI
 RUN brew install gh
-
-# Taken from https://www.gitpod.io/docs/languages/ruby
-RUN echo "rvm_gems_path=/home/gitpod/.rvm" > ~/.rvmrc
-RUN bash -lc "rvm install ruby-$RUBY_VERSION && rvm use ruby-$RUBY_VERSION --default"
-RUN echo "rvm_gems_path=/workspace/.rvm" > ~/.rvmrc
 
 # Install Node and Yarn
 ENV NODE_VERSION=16.13.1
