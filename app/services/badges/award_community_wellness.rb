@@ -20,7 +20,7 @@ module Badges
         # these to check how far back the (continuous) streak goes
         week_streak = 0
         weeks_ago.each_with_index do |week, index|
-          # Week 0 are comments that exist but aren't at least 1 week old yet
+          # Week 0 ar e comments that exist but aren't at least 1 week old yet
           next if week.zero?
 
           # Must have 2 or more non-flagged comments posted on that week
