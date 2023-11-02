@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_17_120855) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_26_152356) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "citext"
   enable_extension "ltree"
@@ -317,7 +317,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_120855) do
     t.datetime "bumped_at", precision: nil
     t.string "cached_tag_list"
     t.bigint "classified_listing_category_id"
-    t.boolean "contact_via_connect", default: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "expires_at", precision: nil
     t.string "location"
@@ -483,8 +482,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_120855) do
     t.boolean "priority", default: false
     t.text "processed_html"
     t.boolean "published", default: false
+    t.integer "render_mode", default: 0
     t.float "success_rate", default: 0.0
     t.ltree "target_geolocations", default: [], array: true
+    t.integer "template", default: 0
     t.integer "type_of", default: 0, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.float "weight", default: 1.0, null: false
@@ -627,7 +628,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_120855) do
     t.text "html"
     t.string "name"
     t.boolean "published", default: false
-    t.float "success_rate", default: 0.0
     t.string "target_tag"
     t.datetime "updated_at", precision: nil, null: false
     t.bigint "user_id"
@@ -1123,7 +1123,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_120855) do
     t.datetime "created_at", precision: nil, null: false
     t.integer "hotness_score", default: 0
     t.string "keywords_for_search"
-    t.bigint "mod_chat_channel_id"
     t.string "name"
     t.string "pretty_name"
     t.string "profile_image"
@@ -1340,7 +1339,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_17_120855) do
     t.boolean "email_badge_notifications", default: true, null: false
     t.boolean "email_comment_notifications", default: true, null: false
     t.boolean "email_community_mod_newsletter", default: false, null: false
-    t.boolean "email_connect_messages", default: true, null: false
     t.boolean "email_digest_periodic", default: false, null: false
     t.boolean "email_follower_notifications", default: true, null: false
     t.boolean "email_membership_newsletter", default: false, null: false
